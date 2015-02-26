@@ -1,0 +1,21 @@
+{
+    "name": "matacms/matacms-settings",
+    "description": "Manages settings for MATA CMS",
+    "keywords": ["yii2", "mata-cms-settings", "mata"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "codeception/codeception": "*",
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-faker": "*",
+        "mata/mata-key-value": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "matacms\\settings\\": ""
+        }
+    }
+}
