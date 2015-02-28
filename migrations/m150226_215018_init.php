@@ -19,11 +19,10 @@ class m150226_215018_init extends Migration {
     public function up() {
         $this->createTable('{{%matacms_setting}}', [
             'Key'          => 'VARCHAR(255) NOT NULL',
-            'FormType'     => 'VARCHAR(255) NOT NULL'
+            'FormInputField'     => 'VARCHAR(255) NOT NULL'
         ]);
 
         $this->addPrimaryKey("PK_Key", "{{%matacms_setting}}", "Key");
-        $this->addForeignKey('fk_setting_keyvalue', '{{%matacms_setting}}', 'Key', '{{%mata_keyvalue}}', 'Key');
     }
 
     public function down() {
