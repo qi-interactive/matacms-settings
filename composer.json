@@ -17,5 +17,8 @@
         "psr-4": {
             "matacms\\settings\\": ""
         }
+    },
+     "extra": {
+        "bootstrap": "matacms\\settings\\Bootstrap"
     }
 }
