@@ -8,12 +8,14 @@ use Yii;
  * This is the model class for table "matacms_setting".
  *
  * @property string $Key
- * @property string $FormType
+ * @property string $FormInputField
  *
  * @property MataKeyvalue $key
  */
-class Setting extends \yii\db\ActiveRecord
-{
+class Setting extends \yii\db\ActiveRecord {
+
+    const DEFAULT_FORM_TYPE = "textInput";
+
     /**
      * @inheritdoc
      */
@@ -28,8 +30,8 @@ class Setting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Key', 'FormType'], 'required'],
-            [['Key', 'FormType'], 'string', 'max' => 255]
+            [['Key', 'FormInputField'], 'required'],
+            [['Key', 'FormInputField'], 'string', 'max' => 255]
         ];
     }
 
@@ -40,15 +42,18 @@ class Setting extends \yii\db\ActiveRecord
     {
         return [
             'Key' => 'Key',
-            'FormType' => 'Form Type',
+            'FormInputField' => 'Form Type',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getKey()
-    {
+    public function getKey() {
         return $this->hasOne(MataKeyvalue::className(), ['Key' => 'Key']);
+    }
+
+    public static function findByKey($key) {
+        return self::find()->where(["Key" => $key])->one();
     }
 }
