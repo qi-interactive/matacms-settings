@@ -3,7 +3,7 @@
 namespace matacms\settings\models;
 
 use Yii;
-
+use mata\keyvalue\models\KeyValue;
 /**
  * This is the model class for table "matacms_setting".
  *
@@ -12,7 +12,7 @@ use Yii;
  *
  * @property MataKeyvalue $key
  */
-class Setting extends \yii\db\ActiveRecord {
+class Setting extends \matacms\db\ActiveRecord {
 
     const DEFAULT_FORM_TYPE = "textInput";
 
@@ -31,7 +31,9 @@ class Setting extends \yii\db\ActiveRecord {
     {
         return [
             [['Key', 'FormInputField'], 'required'],
-            [['Key', 'FormInputField'], 'string', 'max' => 255]
+            [['Key'], 'unique'],
+            [['Key', 'FormInputField'], 'string', 'max' => 255],
+            [['value.Value'], 'safe']
         ];
     }
 
@@ -49,8 +51,8 @@ class Setting extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getKey() {
-        return $this->hasOne(MataKeyvalue::className(), ['Key' => 'Key']);
+    public function getValue() {
+        return $this->hasOne(KeyValue::className(), ['Key' => 'Key']);
     }
 
     public static function findByKey($key) {
