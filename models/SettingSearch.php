@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use matacms\settings\models\Setting;
+use mata\keyvalue\models\KeyValue;
 
 /**
  * SettingSearch represents the model behind the search form about `matacms\settings\models\Setting`.
@@ -18,7 +19,7 @@ class SettingSearch extends Setting
     public function rules()
     {
         return [
-            [['Key', 'FormType'], 'safe'],
+            [['Key', 'FormInputField'], 'safe'],
         ];
     }
 
@@ -46,6 +47,14 @@ class SettingSearch extends Setting
             'query' => $query,
         ]);
 
+        $query->joinWith(['value']); 
+
+        $dataProvider->sort->attributes['value.Value'] = [
+              'asc' => ['Value' => SORT_ASC],
+              'desc' => ['Value' => SORT_DESC],
+         ];
+
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -55,7 +64,7 @@ class SettingSearch extends Setting
         }
 
         $query->andFilterWhere(['like', 'Key', $this->Key])
-            ->andFilterWhere(['like', 'FormType', $this->FormType]);
+            ->andFilterWhere(['like', 'FormInputField', $this->FormInputField]);
 
         return $dataProvider;
     }
