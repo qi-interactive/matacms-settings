@@ -33,7 +33,7 @@ class Setting extends \matacms\db\ActiveRecord {
             [['Key', 'FormInputField'], 'required'],
             [['Key'], 'unique'],
             [['Key', 'FormInputField'], 'string', 'max' => 255],
-            [['value.Value'], 'safe']
+            // [['value.Value'], 'safe']
         ];
     }
 
@@ -46,6 +46,27 @@ class Setting extends \matacms\db\ActiveRecord {
             'Key' => 'Key',
             'FormInputField' => 'Form Type',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        
+        if ($insert) {
+            $keyValue = KeyValue::findByKey($this->Key);
+
+            if ($keyValue == null) 
+                $this->addNewKeyValue();
+        }
+    }
+
+    private function addNewKeyValue() {
+
+        $kv = new KeyValue();
+        $kv->attributes = [
+            "Key" => $this->Key
+        ];
+
+        if ($kv->save() == false)
+            throw new \yii\web\ServerErrorHttpException($kv->getTopError());
     }
 
     /**
