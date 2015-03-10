@@ -30,6 +30,7 @@ class Bootstrap implements BootstrapInterface {
 	}
 
 	private function addNewSetting($key) {
+		
 		$setting = new Setting();
 		$setting->attributes = [
 			"Key" => $key,
@@ -38,7 +39,6 @@ class Bootstrap implements BootstrapInterface {
 
 		if ($setting->save() == false)
 			throw new \yii\web\ServerErrorHttpException($setting->getTopError());
-
 	}
 
 	private function canRun($app) {
