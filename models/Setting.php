@@ -48,6 +48,10 @@ class Setting extends \matacms\db\ActiveRecord {
         ];
     }
 
+    public static function exists($key) {
+        return self::findByKey($key) != null;
+    }
+
     public function afterSave($insert, $changedAttributes) {
         
         if ($insert) {
@@ -62,7 +66,8 @@ class Setting extends \matacms\db\ActiveRecord {
 
         $kv = new KeyValue();
         $kv->attributes = [
-            "Key" => $this->Key
+            "Key" => $this->Key,
+            "Value" => ""
         ];
 
         if ($kv->save() == false)
@@ -77,6 +82,11 @@ class Setting extends \matacms\db\ActiveRecord {
     }
 
     public static function findByKey($key) {
-        return self::find()->where(["Key" => $key])->one();
+        return  self::find()->where(["Key" => $key])->one();
     }
+
+    public static function findValue($key) {
+        return KeyValue::findValue($key);
+    }
+    
 }
