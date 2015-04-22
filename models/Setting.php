@@ -93,7 +93,7 @@ class Setting extends \matacms\db\ActiveRecord {
     /**
      * All values are stored as strings -- try to cast to something more appropriate
      */ 
-    private function castToType($value) {
+    private static function castToType($value) {
         if ($value == "true" || $value == "1")
             return true;
 
