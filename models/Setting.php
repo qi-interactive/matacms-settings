@@ -86,7 +86,22 @@ class Setting extends \matacms\db\ActiveRecord {
     }
 
     public static function findValue($key) {
-        return KeyValue::findValue($key);
+        $retVal = KeyValue::findValue($key);
+        return self::castToType($retVal);
+    }
+
+    /**
+     * All values are stored as strings -- try to cast to something more appropriate
+     */ 
+    private function castToType($value) {
+        if ($value == "true" || $value == "1")
+            return true;
+
+        if ($value == "false" || $value == "0")
+            return false;
+
+        return $value;
+
     }
     
 }
