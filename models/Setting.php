@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
+ */
+
 namespace matacms\settings\models;
 
 use Yii;
 use mata\keyvalue\models\KeyValue;
+
 /**
  * This is the model class for table "matacms_setting".
  *
@@ -16,17 +23,11 @@ class Setting extends \matacms\db\ActiveRecord {
 
     const DEFAULT_FORM_TYPE = "textInput";
 
-    /**
-     * @inheritdoc
-     */
     public static function tableName()
     {
         return 'matacms_setting';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
@@ -36,10 +37,7 @@ class Setting extends \matacms\db\ActiveRecord {
             // [['value.Value'], 'safe']
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
+    
     public function attributeLabels()
     {
         return [

@@ -1,4 +1,10 @@
-<?php 
+<?php
+
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
+ */
 
 namespace matacms\settings;
 
@@ -11,26 +17,22 @@ use matacms\settings\models\Setting;
 class Bootstrap implements BootstrapInterface {
 
 	public function bootstrap($app) {
-
 		if ($this->canRun($app) == false)
 			return;
 
 		Event::on(KeyValue::className(), KeyValue::EVENT_KEY_NOT_FOUND, function($event) {
 			$this->addKeyToSettings($event->message);
 		});
-
 	}
 
 	private function addKeyToSettings($key) {
-
 		$setting = Setting::findByKey($key);
 
 		if ($setting == null) 
 			$this->addNewSetting($key);
 	}
 
-	private function addNewSetting($key) {
-		
+	private function addNewSetting($key) {		
 		$setting = new Setting();
 		$setting->attributes = [
 			"Key" => $key,
@@ -44,4 +46,5 @@ class Bootstrap implements BootstrapInterface {
 	private function canRun($app) {
 		return is_a($app, "yii\console\Application") == false;
 	}
+
 }

@@ -1,22 +1,17 @@
 <?php
 
-/*
- * This file is part of the mata project.
- *
- * (c) mata project <http://github.com/mata/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
  */
 
 use yii\db\Schema;
 use mata\user\migrations\Migration;
 
-/**
- * @author Dmitry Erofeev <dmeroff@gmail.com
- */
 class m150226_215018_init extends Migration {
-    public function up() {
+    
+    public function safeUp() {
         $this->createTable('{{%matacms_setting}}', [
             'Key'          => 'VARCHAR(255) NOT NULL',
             'FormInputField'     => 'VARCHAR(255) NOT NULL'
@@ -25,7 +20,8 @@ class m150226_215018_init extends Migration {
         $this->addPrimaryKey("PK_Key", "{{%matacms_setting}}", "Key");
     }
 
-    public function down() {
+    public function safeDown() {
         $this->dropTable('{{%matacms_setting}}');
     }
+
 }

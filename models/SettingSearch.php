@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
+ */
+
 namespace matacms\settings\models;
 
 use Yii;
@@ -13,9 +19,7 @@ use mata\keyvalue\models\KeyValue;
  */
 class SettingSearch extends Setting
 {
-    /**
-     * @inheritdoc
-     */
+    
     public function rules()
     {
         return [
@@ -23,9 +27,6 @@ class SettingSearch extends Setting
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
@@ -68,4 +69,5 @@ class SettingSearch extends Setting
 
         return $dataProvider;
     }
+
 }
