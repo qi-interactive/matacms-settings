@@ -23,6 +23,11 @@ use mata\base\Module as BaseModule;
 class Module extends BaseModule {
 
 	public function getNavigation() {
-		return "/mata-cms/settings/settings";
+
+		// Change to checking if Admin when RBAC is implemented
+		if (YII_DEBUG)
+			return "/mata-cms/settings/settings";
+
+		return false;
 	}
 }
