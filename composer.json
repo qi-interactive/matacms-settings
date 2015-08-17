@@ -10,6 +10,9 @@
     "require": {
         "mata/mata-key-value": "~1.0.1-alpha"
     },
+    "require-dev": {
+        "mata/mata-key-value": "dev-development"
+    },
     "autoload": {
         "psr-4": {
             "matacms\\settings\\": ""
