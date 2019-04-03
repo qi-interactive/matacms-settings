@@ -83,9 +83,16 @@ class Setting extends \matacms\db\ActiveRecord {
         return  self::find()->where(["Key" => $key])->one();
     }
 
-    public static function findValue($key) {
-        $retVal = KeyValue::findValue($key);
-        return self::castToType($retVal);
+    public static function findValue($key)
+    {
+        $value = \Yii::$app->cache->get(__CLASS__ . "_" . md5($key));
+
+        if ($value === false) {
+            $value = KeyValue::findValue($key);
+            \Yii::$app->cache->set(__CLASS__ . "_" . md5($key), $value, null, new \matacms\cache\caching\MataLastUpdatedTimestampDependency());
+        }
+
+        return self::castToType($value);
     }
 
     /**
